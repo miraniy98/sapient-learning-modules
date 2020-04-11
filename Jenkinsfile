@@ -28,7 +28,7 @@ pipeline {
             success {
                junit '**/target/surefire-reports/TEST-*.xml'
                archiveArtifacts 'maven-basic/target/*.jar'
-               dir("maven-basic/src/main/java/sapient/interactive/connect") {
+               dir("maven-sample/src/main/java/sapient/learning/module") {
                    sh "java App.java"
                }
             }
