@@ -1,0 +1,38 @@
+pipeline {
+   agent any
+
+   tools {
+      // Install the Maven version configured as "M3" and add it to the path.
+      maven "M3"
+   }
+
+   stages {
+      stage('Build') {
+         steps {
+            	// Get some code from a GitHub repository
+           	git 'https://github.com/miraniy98/sapient-learning-modules.git'
+            	sh  "git checkout week-1"
+            	dir ("maven-sample") {
+            	sh  "pwd"
+            	sh  "ls"
+            	// Run Maven on a Unix agent.
+            	sh "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+            	// To run Maven on a Windows agent, use
+            	// bat "mvn -Dmaven.test.failure.ignore=true clean package"
+         }
+
+         post {
+            // If Maven was able to run the tests, even if some of the test
+            // failed, record the test results and archive the jar file.
+            success {
+               junit '**/target/surefire-reports/TEST-*.xml'
+               archiveArtifacts 'maven-basic/target/*.jar'
+               dir("maven-basic/src/main/java/sapient/interactive/connect") {
+                   sh "java App.java"
+               }
+            }
+         }
+      }
+   }
+}
