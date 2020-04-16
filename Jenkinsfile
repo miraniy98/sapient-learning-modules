@@ -1,25 +1,27 @@
 pipeline {
    agent any
-
-   tools {
+   triggers {
+        cron('H 10 * * *')
+    }   
+     tools {
       // Install the Maven version configured as "M3" and add it to the path.
       maven "M3"
    }
-
    stages {
+      
       stage('Build') {
          steps {
-            	// Get some code from a GitHub repository
-           	git 'https://github.com/miraniy98/sapient-learning-modules.git'
-            	sh  "git checkout week-1"
-            	dir ("maven-sample") {
+            // Get some code from a GitHub repository
+            git 'https://github.com/miraniy98/sapient-learning-modules.git'
+            sh  "git checkout week-1"
+            dir ("maven-sample") {
             	sh  "pwd"
             	sh  "ls"
             	// Run Maven on a Unix agent.
             	sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
-            	// To run Maven on a Windows agent, use
-            	// bat "mvn -Dmaven.test.failure.ignore=true clean package"
+            // To run Maven on a Windows agent, use
+            // bat "mvn -Dmaven.test.failure.ignore=true clean package"
          }
 
          post {
@@ -28,9 +30,6 @@ pipeline {
             success {
                junit '**/target/surefire-reports/TEST-*.xml'
                archiveArtifacts 'maven-sample/target/*.jar'
-               dir("maven-sample/src/main/java/sapient/learning/module") {
-                   sh "java App.java"
-               }
             }
          }
       }
