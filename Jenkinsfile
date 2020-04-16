@@ -27,7 +27,7 @@ pipeline {
             // failed, record the test results and archive the jar file.
             success {
                junit '**/target/surefire-reports/TEST-*.xml'
-               archiveArtifacts 'maven-basic/target/*.jar'
+               archiveArtifacts 'maven-sample/target/*.jar'
                dir("maven-sample/src/main/java/sapient/learning/module") {
                    sh "java App.java"
                }
