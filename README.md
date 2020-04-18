@@ -17,9 +17,9 @@ Process to create replication of mongodb
 
 ### Configuration
 
-mongodb - 27017 (primary)
-mongodb1 - 27018 (immediate replication)
-mongodb2 - 27019 (delayed replication)
+- mongodb - 27017 (primary)
+- mongodb1 - 27018 (immediate replication)
+- mongodb2 - 27019 (delayed replication)
 
 ```
 - mongo --port 27017 (to run queries in primary node)
@@ -30,9 +30,9 @@ mongodb2 - 27019 (delayed replication)
    
 - rs.add("localhost:27019");
 
-- cnf = {\_id: 'replicationSet', "protocolVersion" : NumberLong(1), members: [{\_id: 0, host: 'localhost:27017'}, 
-            {\_id: 1, host: 'localhost:27018'}, 
-            {\_id: 2, host: 'localhost:27019', priority: 0, hidden: true, slaveDelay: 3600}]}
+- cnf = {_id: 'replicationSet', "protocolVersion" : NumberLong(1), members: [{_id: 0, host: 'localhost:27017'}, 
+            {_id: 1, host: 'localhost:27018'}, 
+            {_id: 2, host: 'localhost:27019', priority: 0, hidden: true, slaveDelay: 3600}]}
 
 
 - rs.reconfig(cnf)
