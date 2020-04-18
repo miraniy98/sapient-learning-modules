@@ -13,12 +13,15 @@ Process to create replication of mongodb
 - mongod --port 27018 --dbpath /var/lib/mongodb1 --replSet replicationSet
 
 - mongod --port 27019 --dbpath /var/lib/mongodb2 --replSet replicationSet
+```
 
-mongodb1 is for simple replication and mongodb2 is for delayed replication
+### Configuration
+
 mongodb - 27017 (primary)
-mongodb1 - 27018
-mongodb2 - 27019
+mongodb1 - 27018 (immediate replication)
+mongodb2 - 27019 (delayed replication)
 
+```
 - mongo --port 27017 (to run queries in primary node)
 
 - rs.initiate() (for initiating replication set)
@@ -35,9 +38,9 @@ mongodb2 - 27019
 - rs.reconfig(cnf)
 
 - rs.config() (to verify the delay of the node)
-
-Verification:
-
+```
+### Verification:
+```
 - use daiict
 - db.sapient.insertOne({name: "yash" , "title": "ASDE1"})
 
