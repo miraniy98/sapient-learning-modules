@@ -1,0 +1,27 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    background-color: whitesmoke;
+}
+@media screen and (min-width: 300px) and (min-height: 350px) {
+    #changingLandscape {
+        font-family: Helvetica !important;
+        color: red !important;
+        font-size: 24px !important;
+    }
+}
+
+@media (min-width: 100px) and (min-height: 100px) {
+    #changingLandscape {
+        font-family: Courier;
+        color: purple;
+        font-size: 18px;
+    }
+}
+@media screen and (min-width: 786px) and (min-height: 600px) {
+    #changingLandscape {
+        font-family: Arial !important;
+        color: blue !important;
+        font-size: 36px !important;
+    }
+}
